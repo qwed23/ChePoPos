@@ -1,14 +1,17 @@
 import React from "react";
-import Party from "./pages/Party";
-import { Route, Switch } from "react-router-dom";
+import Party from "./pages/Party.js";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const Main = () => {
+const Main = (props) => {
   return (
-    <>
-      <Switch>
-        <Route  path="/Party" component={Party} />
-      </Switch>
-    </>
+    <div>
+      <Router>
+        <Switch>
+          <Route exact path={`/party/:status`} component={Party} />
+          <Route path={`/`} render={(props)=>null} />
+        </Switch>
+      </Router>
+    </div>
   );
 };
 
