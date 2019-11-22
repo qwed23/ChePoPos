@@ -14,8 +14,8 @@ const Party = () => {
     setUrlArray([...urlArray, url]);
   };
 
-  const splitFrame = urlArray.map(url => <iframe key={url} src={url}></iframe>);
-  const oneFrame = <iframe title={urlArray[idx]} src={urlArray[idx]}></iframe>;
+  const splitFrame = urlArray.map(url => <iframe title={url} key={url} src={url}/>);
+  const oneFrame = <iframe title={urlArray[idx]} src={urlArray[idx]}/>;
 
   return (
     <>

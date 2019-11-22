@@ -1,10 +1,13 @@
 import React from "react";
 import Party from "./pages/Party";
+import { Route, Switch } from "react-router-dom";
 
 const Main = () => {
   return (
     <>
-      <Party />
+      <Switch>
+        <Route  path="/Party" component={Party} />
+      </Switch>
     </>
   );
 };
