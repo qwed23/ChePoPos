@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import ToolsReducer from "../tools";
 import { Link, useParams } from "react-router-dom";
 
-const Party = (props) => {
+const Party = props => {
   const { status } = useParams();
   const [state, dispatch] = useReducer(ToolsReducer, { idx: 0, split: status });
   const { idx, split } = state;
@@ -22,6 +22,8 @@ const Party = (props) => {
   ));
 
   const oneFrame = <iframe title={urlArray[idx]} src={urlArray[idx]} />;
+console.log('the SPLIT', split);
+
 
   return (
     <>
@@ -42,12 +44,12 @@ const Party = (props) => {
           <button onClick={() => {}}> - </button>
           <button onClick={() => dispatch({ type: "NEXT" })}> {"<<"} </button>
           <button onClick={() => dispatch({ type: "BACK" })}> {">>"} </button>
-          <button onClick={() => dispatch({ type: "SPLIT" })}> Split </button>
+          <button onClick={() => dispatch({ type: "SPLIT" })}> <Link to={ !split? `/party/split`: `/party/nosplit`}> Split </Link> </button>
         </aside>
 
         <Link to={`/party/${split}`}>
           <section>
-            {status === "split" ? splitFrame : oneFrame}{" "}
+            {status === "split" && split ? splitFrame : oneFrame} 
           </section>
         </Link>
       </main>
