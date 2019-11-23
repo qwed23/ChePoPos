@@ -37,7 +37,6 @@ const Party = () => {
   const oneFrame = <iframe title={urlArray[idx]} src={urlArray[idx]} />;
 
   return (
-    <>
       <main>
         {isDelete && "DELETE MODE ON"}
         <form onSubmit={submitHandler}>
@@ -64,7 +63,6 @@ const Party = () => {
 
         <section>{status === "split" && split ? splitFrame : oneFrame}</section>
       </main>
-    </>
   );
 };
 
