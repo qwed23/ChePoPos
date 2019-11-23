@@ -4,12 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 const Party = () => {
   const { status } = useParams();
-  const [state, dispatch] = useReducer(ToolsReducer, {
-    idx: 0,
-    split: status,
-    isDelete: false
-  });
-
+  const [state, dispatch] = useReducer(ToolsReducer, {idx: 0});
   const { idx, split, isDelete } = state;
   const [url, setUrl] = useState();
   const [urlArray, setUrlArray] = useState([
