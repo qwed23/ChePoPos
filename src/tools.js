@@ -8,6 +8,8 @@ const ToolsReducer = (state, action) => {
       return { ...state, idx: state.idx - 1 };
     case "SPLIT":
       return { ...state, split: state.split ? false : true };
+      case "DELETE":
+      return { ...state, isDelete: state.isDelete ? false : true };
     default:
       throw new Error("didnt work");
   }

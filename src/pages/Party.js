@@ -2,12 +2,18 @@ import React, { useState, useReducer } from "react";
 import ToolsReducer from "../tools";
 import { Link, useParams } from "react-router-dom";
 
-const Party = props => {
+const Party = () => {
   const { status } = useParams();
-  const [state, dispatch] = useReducer(ToolsReducer, { idx: 0, split: status });
-  const { idx, split } = state;
+  const [state, dispatch] = useReducer(ToolsReducer, {
+    idx: 0,
+    split: status,
+    isDelete: false
+  });
+
+  const { idx, split, isDelete } = state;
   const [url, setUrl] = useState();
   const [urlArray, setUrlArray] = useState([
+    "https://www.producerspot.com/news/best-vst-plugins",
     "https://www.one.co.il/",
     "https://home.footybite.com/"
   ]);
@@ -17,17 +23,28 @@ const Party = props => {
     setUrlArray([...urlArray, url]);
   };
 
+  const deleteHandler = evt => {
+    const tempUrlArray = urlArray.filter(
+      iteam => iteam !== evt.target.dataset.rs
+    );
+    setUrlArray(tempUrlArray);
+  };
+
   const splitFrame = urlArray.map(url => (
-    <iframe title={url} key={url} src={url} />
+    <iframe
+      onClick={isDelete ? deleteHandler : null}
+      data-rs={url}
+      title={url}
+      key={url}
+      src={url}
+    />
   ));
-
   const oneFrame = <iframe title={urlArray[idx]} src={urlArray[idx]} />;
-console.log('the SPLIT', split);
-
 
   return (
     <>
       <main>
+        {isDelete && "DELETE MODE ON"}
         <form onSubmit={submitHandler}>
           <input
             value={url}
@@ -39,19 +56,18 @@ console.log('the SPLIT', split);
         </form>
 
         <aside>
-          {idx + 1}/{urlArray.length + 1}
+          {idx + 1}/{urlArray.length}
           <button onClick={() => {}}> + </button>
           <button onClick={() => {}}> - </button>
+          <button onClick={() => dispatch({ type: "DELETE" })}> Delete</button>
           <button onClick={() => dispatch({ type: "NEXT" })}> {"<<"} </button>
           <button onClick={() => dispatch({ type: "BACK" })}> {">>"} </button>
-          <button onClick={() => dispatch({ type: "SPLIT" })}> <Link to={ !split? `/party/split`: `/party/nosplit`}> Split </Link> </button>
+          <button onClick={() => dispatch({ type: "SPLIT" })}>
+            <Link to={!split ? `/party/split` : `/party/nosplit`}>Split</Link>
+          </button>
         </aside>
 
-        <Link to={`/party/${split}`}>
-          <section>
-            {status === "split" && split ? splitFrame : oneFrame} 
-          </section>
-        </Link>
+        <section>{status === "split" && split ? splitFrame : oneFrame}</section>
       </main>
     </>
   );
