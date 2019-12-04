@@ -14,9 +14,9 @@ const Party = () => {
     "https://www.google.com/webhp?igu=1"
   ]);
 
-  const iFrameWarpper = {
+  const iFrameWarpper = {  
     position: "relative",
-    paddingBottom: split? "56.25%" : "100vh",
+    paddingBottom: "56.25%" /* 16:9 */,
     paddingTop: 25,
     height: 0
   };
@@ -27,39 +27,33 @@ const Party = () => {
     left: 0,
     width: "100%",
     height: "100%"
-  };
+  }
 
   const submitHandler = event => {
     event.preventDefault();
     setUrlArray([...urlArray, url]);
   };
 
+
   const splitFrame = urlArray.map(url => (
-    <div style={iFrameWarpper}>
-      <iframe
-        style={iFrameStyle}
-        onClick={e =>
-          isDelete
-            ? setUrlArray(
-                urlArray.filter(iteam => iteam !== e.target.dataset.rs)
-              )
-            : null
-        }
-        // name ="X-frame-Options"
-        data-rs={url}
-        title={url}
-        key={url}
-        src={url}
-        // SameSite='sameOrigin'
-      />
+    <div style={iFrameWarpper}> 
+    <iframe style={iFrameStyle}
+      onClick={e =>
+        isDelete
+          ? setUrlArray(urlArray.filter(iteam => iteam !== e.target.dataset.rs))
+          : null
+      }
+      // name ="X-frame-Options"
+      data-rs={url}
+      title={url}
+      key={url}
+      src={url}
+      // SameSite='sameOrigin'
+    />
     </div>
   ));
 
-  const oneFrame = (
-    <div style={iFrameWarpper}>
-      <iframe style={iFrameStyle} title={urlArray[idx]} src={urlArray[idx]} />{" "}
-    </div>
-  );
+  const oneFrame = <div style={iFrameWarpper}><iframe  style={iFrameStyle} title={urlArray[idx]} src={urlArray[idx]} />  </div>;
 
   return (
     <main>
