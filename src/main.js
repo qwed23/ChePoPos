@@ -1,11 +1,10 @@
 import React ,{ useState} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import iFrameManager from "./pages/iframeManager.js";
-import {RSSParser } from '../node_modules/rss-parser'
+import RSSFeed from './pages/rssFeed'
 
 const Main = props => {
 
-const [rssIt,setRssit]= useState('');
 
 
   return (
@@ -14,11 +13,11 @@ const [rssIt,setRssit]= useState('');
         <Switch>
           <Route exact path={`/party/:status`} component={iFrameManager} />
         </Switch>
-      </Router>
+      </Router>  
 
-
-  
+      <RSSFeed></RSSFeed>
     </div>
+
   );
 };
 
