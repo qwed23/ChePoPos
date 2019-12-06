@@ -2,11 +2,13 @@ import React, { useState, useReducer } from "react";
 import ToolsReducer from "../tools";
 import { Link, useParams } from "react-router-dom";
 
-const Party = () => {
+const IFrameManager = () => {
   const { status } = useParams();
   const [state, dispatch] = useReducer(ToolsReducer, { idx: 0 });
   const { idx, split, isDelete } = state;
   const [url, setUrl] = useState();
+
+  
   const [urlArray, setUrlArray] = useState([
     "https://www.producerspot.com/news/best-vst-plugins",
     "https://www.one.co.il/",
@@ -16,7 +18,7 @@ const Party = () => {
 
   const iFrameWarpper = {
     position: "relative",
-    paddingBottom: split? "56.25%" : "100vh",
+    paddingBottom: split ? "56.25%" : "100vh",
     paddingTop: 25,
     height: 0
   };
@@ -91,4 +93,4 @@ const Party = () => {
   );
 };
 
-export default Party;
+export default IFrameManager;
