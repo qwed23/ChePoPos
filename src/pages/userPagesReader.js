@@ -1,14 +1,16 @@
 import React, { useState, useReducer } from "react";
 import ToolsReducer from "../tools";
 import { Link, useParams } from "react-router-dom";
+import SplitFrame from "../compopments/splitedFrames";
+import SingleFrame from "../compopments/singleFrame"
+import UserLinkGroups from '../pages/linksMenu'
 
-const IFrameManager = () => {
+const UserPageReader = () => {
   const { status } = useParams();
   const [state, dispatch] = useReducer(ToolsReducer, { idx: 0 });
   const { idx, split, isDelete } = state;
   const [url, setUrl] = useState();
 
-  
   const [urlArray, setUrlArray] = useState([
     "https://www.producerspot.com/news/best-vst-plugins",
     "https://www.one.co.il/",
@@ -18,7 +20,7 @@ const IFrameManager = () => {
 
   const iFrameWarpper = {
     position: "relative",
-    paddingBottom: split ? "56.25%" : "100vh",
+    paddingBottom: split ? "56.25%" : "50vh",
     paddingTop: 25,
     height: 0
   };
@@ -36,33 +38,6 @@ const IFrameManager = () => {
     setUrlArray([...urlArray, url]);
   };
 
-  const splitFrame = urlArray.map(url => (
-    <div style={iFrameWarpper}>
-      <iframe
-        style={iFrameStyle}
-        onClick={e =>
-          isDelete
-            ? setUrlArray(
-                urlArray.filter(iteam => iteam !== e.target.dataset.rs)
-              )
-            : null
-        }
-        // name ="X-frame-Options"
-        data-rs={url}
-        title={url}
-        key={url}
-        src={url}
-        // SameSite='sameOrigin'
-      />
-    </div>
-  ));
-
-  const oneFrame = (
-    <div style={iFrameWarpper}>
-      <iframe style={iFrameStyle} title={urlArray[idx]} src={urlArray[idx]} />{" "}
-    </div>
-  );
-
   return (
     <main>
       {isDelete && "DELETE MODE ON"}
@@ -76,6 +51,7 @@ const IFrameManager = () => {
         <button type="submit"> Add</button>
       </form>
 
+
       <aside>
         {idx + 1}/{urlArray.length}
         <button onClick={() => {}}> + </button>
@@ -88,9 +64,27 @@ const IFrameManager = () => {
         </button>
       </aside>
 
-      <section>{status === "split" ? splitFrame : oneFrame}</section>
+      <section>
+        <div>
+          {status === "split" ? (
+            <SplitFrame
+              warrper={iFrameWarpper}
+              style={iFrameStyle}
+              isDelete={isDelete}
+              urlArray={urlArray}
+              setUrlArray={setUrlArray}
+            />
+          ) : (
+            <SingleFrame
+              iFrameWarpper={iFrameWarpper}
+              iFrameStyle={iFrameStyle}
+              urlArray={urlArray[idx]}
+            />
+          )}
+        </div>
+      </section>
     </main>
   );
 };
 
-export default IFrameManager;
+export default UserPageReader;

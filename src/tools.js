@@ -7,7 +7,7 @@ const ToolsReducer = (state, action) => {
     case "BACK":
       return { ...state, idx: state.idx - 1 };
     case "SPLIT":
-      return { ...state, split: state.split ? false : true };
+      return { ...state, split: state.split ? false : true } ;
       case "DELETE":
       return { ...state, isDelete: state.isDelete ? false : true };
     default:
