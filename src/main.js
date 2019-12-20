@@ -54,7 +54,8 @@ const Main = props => {
       <div></div>
       <button onClick={() => (nav ? setNav(false) : setNav(true))}>nav</button>
       <button onClick={submitHandler}>send</button>
-      {/* {nav && <UserLinkGroups />} */}
+ 
+      {nav && <UserLinkGroups urlArray={urlArray}/>}
       {isLoading ?  'Loading' : <div> {urlArray[0].name}</div>}
       {/* <Router>
         <Switch>
