@@ -1,12 +1,6 @@
-import React, { useState } from "react";
-import SplitFrame from "../compopments/splitedFrames";
+import React from "react";
 
-const UserLinkGroups = (props) => {
-  //demo array
-  const [urlArray, setUrlArray] = useState('');
-
-  const x= props.urlArray
-
+const UserLinkGroups = props => {
   return (
     <div
       style={{
@@ -14,23 +8,21 @@ const UserLinkGroups = (props) => {
         flexDirection: "column",
         zIndex: 222,
         backgroundColor: "darkgrey",
-        position: 'absolute',
-        color: 'white',
+        color: "white",
         left: 0,
-        top: '10%',
-        opacity:0.7,
-        position: 'fixed'
-        // THIS STYLE OBJECTE NEED TO BE CSS CUZE REACT DON'T SUPPORT BACKDROP FILTERS
+        top: "10%",
+        opacity: 0.7,
+        position: "fixed"
       }}
-
     >
-
-      {props.urlArray.map((item, index) => (
+      {props.urlArray.map(item => (
         <div style={{ border: "2px solid black" }}>
           <h2> {item.name} </h2>
-          {item.links.map(ele => (
-            <p> {ele}</p>
+          <ul> 
+          {item.links.map(element => (
+            <li>{element}</li>
           ))}
+          </ul>
         </div>
       ))}
     </div>

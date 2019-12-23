@@ -11,12 +11,10 @@ const SplitFrame = (props) => props.urlArray.map(url => (
               )
             : null
         }
-        // name ="X-frame-Options"
         data-rs={url}
         title={url}
         key={url}
         src={url}
-        // SameSite='sameOrigin'
       />
     </div>
   ));
