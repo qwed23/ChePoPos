@@ -3,7 +3,6 @@ import React from "react";
 class RSSFeed extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       rss: []
     };
@@ -16,15 +15,23 @@ class RSSFeed extends React.Component {
   }
 
   render() {
-    const x = this.state.rss.map(item => (
-        item.title
-    ));
-    return <React.Fragment> {x}</React.Fragment>;
+    return (
+      <React.Fragment>
+        {this.state.rss.map(item => (
+          <div key={item.guid}>
+            {item.title}
+            {/* <iframe src={item.link}> </iframe> */}
+            {item.description}
+            {item.guid}
+          </div>
+        ))}
+      </React.Fragment>
+    );
   }
 
   componentDidMount() {
     const parseUrl = "https://api.rss2json.com/v1/api.json?rss_url=";
-    const rssUrl = "http://www.ynet.co.il/Integration/StoryRss3082.xml";
+    const rssUrl = "https://www.one.co.il/cat/coop/xml/rss/newsfeed.aspx";
     fetch(parseUrl + rssUrl)
       .then(response => response.json())
       .then(json => {
